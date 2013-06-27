@@ -39,6 +39,7 @@ class TingSearchResult implements Iterator, Countable {
 
   // Iterator
   protected $_position;
+
   public function __construct(OutputInterface $result, TingSearchRequest $request) {
     $this->_position = 0;
     $this->perPage = $request->getParameter('stepValue');

@@ -24,6 +24,12 @@ class TingObjectResult {
    * Build items from raw data (json).
    */
   protected function process() {
+    // Check for errors.
+    $error = $this->result->getValue('searchResponse/error');
+    if (!empty($error)) {
+      throw new TingClientException($error);
+    }
+
     $data = $this->result->getValue('searchResponse/result');
     $items = $data->getValue('searchResult');
     $this->item = new TingObject($items[0]);
