@@ -84,4 +84,8 @@ class TingObject {
     return $localId[1];
   }
 
+  public function getOwnerId() {
+    $localId = explode(':', $this->getObjectId());
+    return $localId[0];
+  }
 }
