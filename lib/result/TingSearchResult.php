@@ -53,11 +53,16 @@ class TingSearchResult implements Iterator, Countable {
    */
   protected function process() {
     // Check for errors.
+    if (empty($this->result)) {
+      throw new TingClientException('No response from server. Might be a timeout.');
+    }
+
     $error = $this->result->getValue('searchResponse/error');
     if (!empty($error)) {
       throw new TingClientException($error);
     }
 
+    // Get results.
     $data = $this->result->getValue('searchResponse/result');
 
     $this->hitCount = $data->getValue('hitCount');
