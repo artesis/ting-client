@@ -60,6 +60,12 @@ class TingSearchResult implements Iterator, Countable {
 
     $data = $this->result->getValue('searchResponse/result');
 
+    // Empty response without any errors.
+    if ($data === NULL) {
+      watchdog('ting client', t('Empty response without any errors'), array(), WATCHDOG_WARNING);
+      return;
+    }
+
     $this->hitCount = $data->getValue('hitCount');
     $this->collectionCount = $data->getValue('collectionCount');
     $this->hasMore = filter_var($data->getValue('more'), FILTER_VALIDATE_BOOLEAN);
