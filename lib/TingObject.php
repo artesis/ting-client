@@ -48,8 +48,11 @@ class TingObject {
 
     // Get formatsAvailable from response.
     // Must be always an array.
-    $formats = $data->getValue('formatsAvailable')->toArray();
-    if (!empty($formats['format'])) {
+    $formats = $data->getValue('formatsAvailable');
+    if (!empty($formats)) {
+      $formats = $formats->toArray();
+    }
+    if (is_array($formats) && !empty($formats['format'])) {
       $formats = $formats['format'];
       if (is_array($formats)) {
         $this->formats = $formats;
