@@ -73,4 +73,12 @@ class TingSearchRequest extends TingGenericRequest {
     return $this->getParameter('sort');
   }
 
+  public function setUserDefinedRanking($value) {
+    $this->setParameter('userDefinedRanking', $value);
+  }
+
+  public function getUserDefinedRanking() {
+    return $this->getParameter('userDefinedRanking');
+  }
+
 }
