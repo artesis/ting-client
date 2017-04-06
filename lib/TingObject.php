@@ -91,4 +91,12 @@ class TingObject {
     $localId = explode(':', $this->getObjectId());
     return $localId[0];
   }
+
+  public function getData() {
+    return $this->data;
+  }
+
+  public function setData($data) {
+    $this->data = $data;
+  }
 }
