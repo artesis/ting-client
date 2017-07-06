@@ -81,4 +81,7 @@ class TingSearchRequest extends TingGenericRequest {
     return $this->getParameter('userDefinedRanking');
   }
 
+  public function setQueryPrefix($prefix) {
+    $this->setParameter('query', implode(' and ', array($prefix, $this->getQuery())));
+  }
 }
