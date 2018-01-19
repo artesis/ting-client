@@ -24,7 +24,7 @@ class TingObject {
     if (is_a($record, 'JsonOutput')) {
       $record = $record->toArray();
     } else {
-      throw new TingClientException('Could not get record');
+      throw new TingObjectException('Could not get record');
     }
 
     $this->data = array_merge($this->data, $record);
