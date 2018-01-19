@@ -78,7 +78,13 @@ class TingSearchResult implements Iterator, Countable {
     $items = $data->getValue('searchResult', 1);
     if (!empty($items)) {
       foreach ($items as $item) {
-        $this->items[] = new TingObject($item);
+        try {
+          $this->items[] = new TingObject($item);
+        }
+        catch (TingObjectException $e) {
+          // Ignore malformed or empty items.
+          continue;
+        }
       }
     }
 
