@@ -42,10 +42,15 @@ class TingRelatedObjectsResult implements Iterator, Countable {
     $this->collectionCount = $data->getValue('collection/numberOfObjects');
 
     $items = $data->getValue('collection/object');
-
     if (!empty($items)) {
       foreach ($items as $item) {
-        $this->items[] = new TingObject($item);
+        try {
+          $this->items[] = new TingObject($item);
+        }
+        catch (TingObjectException $e) {
+          // Ignore malformed or empty items.
+          continue;
+        }
       }
     }
 
