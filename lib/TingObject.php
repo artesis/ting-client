@@ -40,7 +40,13 @@ class TingObject {
         );
         $object = $row->getValue('relationObject');
         if (!empty($object)) {
-          $relation['object'] = new TingObject($object);
+          try {
+            $relation['object'] = new TingObject($object);
+          }
+          catch (TingObjectException $e) {
+            // Ignore malformed or empty items.
+            continue;
+          }
         }
         $this->relations[] = $relation;
       }
