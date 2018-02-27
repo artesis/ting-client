@@ -32,7 +32,13 @@ class TingObjectResult {
 
     $data = $this->result->getValue('searchResponse/result');
     $items = $data->getValue('searchResult');
-    $this->item = new TingObject($items[0]);
+    try {
+      $this->item = new TingObject($items[0]);
+    }
+    catch (TingObjectException $e) {
+      throw new TingClientException($e->getMessage());
+    }
+
     $this->result = null;
   }
 
