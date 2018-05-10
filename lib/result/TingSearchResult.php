@@ -183,4 +183,8 @@ class TingSearchResult implements Iterator, Countable {
   public function count() {
     return $this->collectionCount;
   }
+
+  public function getItems() {
+    return $this->items;
+  }
 }
