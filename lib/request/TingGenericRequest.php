@@ -64,6 +64,9 @@ class TingGenericRequest implements TingRequestInterface {
   public function getAction() {
     return $this->action;
   }
+  public function setParameters($array) {
+    $this->parameters = array_merge($this->parameters, $array);
+  }
 
   /**
    *
