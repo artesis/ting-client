@@ -32,14 +32,21 @@ class TingObjectResult {
 
     $data = $this->result->getValue('searchResponse/result');
     $items = $data->getValue('searchResult');
+
+    // Opensearch 5.2 introduces new error element in "searchResult" if record
+    // is unavailable. If the "error" is present, log it.
+    if (!empty($items[0]->getValue('collection/object/error'))) {
+      $error = $items[0]->getValue('collection/object/error');
+      throw new TingClientException($error);
+    }
+
     try {
       $this->item = new TingObject($items[0]);
-    }
-    catch (TingObjectException $e) {
+    } catch (TingObjectException $e) {
       throw new TingClientException($e->getMessage());
     }
 
-    $this->result = null;
+    $this->result = NULL;
   }
 
   public function getObject() {
